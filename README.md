@@ -1,4 +1,4 @@
-# Clash Setting
+# Clash Rules Setting
 
 ⚡ 一个用于 [Clash Verge Rev](https://www.clashverge.dev/guide/quickstart.html) / [Mihomo (Clash Meta)](https://wiki.metacubex.one/) 的 **全局扩展脚本 + 规则集** 仓库，开箱即用。
 
