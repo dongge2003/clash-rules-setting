@@ -4,6 +4,7 @@ const ruleProviderCommon = {
 	format: 'yaml',
 	interval: 86400,
 };
+
 // 规则集配置
 const ruleProviders = {
 	//https://github.com/Loyalsoldier/clash-rules
@@ -174,37 +175,44 @@ const ruleProviders = {
 
 // 规则
 const rules = [
-	//自定义
+	//自定义...
+	"DOMAIN,commandcode.ai,AI",
+	"IP-CIDR,111.228.63.123/32,DIRECT",
 
-	//dongge2003
+	//clash
+	"DOMAIN,clash.razord.top,全局直连",
+	"DOMAIN,yacd.haishan.me,全局直连",
+
+	//广告过滤
+	"RULE-SET,reject,广告过滤",
+
+	//直连
+	// "RULE-SET,applications,全局直连",
+	"RULE-SET,private,全局直连",
+	"RULE-SET,apple,全局直连",
+	"RULE-SET,icloud,全局直连",
+	"RULE-SET,direct,全局直连",
+	"RULE-SET,lancidr,全局直连",
+	"RULE-SET,cncidr,全局直连",
+
+	//AI
 	"RULE-SET,AiDomain,AI",
 	"RULE-SET,CiciAi,AI",
+
+	//其他
 	"RULE-SET,Epic,延迟选优",
 	"RULE-SET,Sony,延迟选优",
 	"RULE-SET,Steam,延迟选优",
-	"RULE-SET,SteamCn,全局直连",
 	"RULE-SET,Developer,延迟选优",
 	"RULE-SET,Web3,延迟选优",
 	"RULE-SET,Khan,延迟选优",
 	"RULE-SET,Edutools,延迟选优",
 	"RULE-SET,UK,延迟选优",
-
-	//https://github.com/Loyalsoldier/clash-rules
-	"RULE-SET,applications,全局直连",
-	"DOMAIN,clash.razord.top,全局直连",
-	"DOMAIN,yacd.haishan.me,全局直连",
-	"RULE-SET,private,全局直连",
-	"RULE-SET,reject,广告过滤",
-	"RULE-SET,icloud,全局直连",
-	// "RULE-SET,google,延迟选优", (慎用)
-	"RULE-SET,apple,全局直连",
-	"RULE-SET,proxy,延迟选优",
-	"RULE-SET,direct,全局直连",
-	"RULE-SET,lancidr,全局直连",
-	"RULE-SET,cncidr,全局直连",
+	"RULE-SET,proxy,AI",
 	"RULE-SET,telegramcidr,延迟选优",
+	// "RULE-SET,google,延迟选优", (慎用)
 
-	//其他
+	//漏网之鱼
 	"GEOIP,LAN,全局直连",
 	"GEOIP,CN,全局直连",
 	"MATCH,漏网之鱼",
@@ -230,14 +238,13 @@ function main(config) {
 		throw new Error('配置文件中未找到任何代理');
 	}
 
-
 	// 覆盖原配置中的代理组
 	config['proxy-groups'] = [
 		{
 			...groupBaseOption,
 			"name": "延迟选优",
-            "interval": 300,
-			"hidden": true,
+			"interval": 300,
+			"hidden": false,
 			"type": "url-test",
 			"tolerance": 100,
 			"include-all": true,
@@ -277,10 +284,10 @@ function main(config) {
 			"include-all": true,
 			"icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
 		},
-        {
+		{
 			...groupBaseOption,
 			"name": "全局直连",
-            "hidden": true,
+			"hidden": true,
 			"type": "select",
 			"proxies": ["DIRECT"],
 			"icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg"
@@ -293,21 +300,20 @@ function main(config) {
 			"icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/bug.svg"
 		},
 		{
-			...groupBaseOption,
 			"expected-status": "200",
 			"name": "AI",
 			"type": "url-test",
 			"url": "https://chatgpt.com",
 			"interval": 300,
 			"include-all": true,
-			"filter": "🇯🇵|🇺🇸",
+			"filter": "🇺🇸",
 			"icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg",
 		},
 		{
 			...groupBaseOption,
 			"name": "漏网之鱼",
 			"type": "select",
-			"proxies": ["延迟选优","全局直连"],
+			"proxies": ["延迟选优", "全局直连"],
 			"include-all": true,
 			"icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/fish.svg"
 		}
