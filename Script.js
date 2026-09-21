@@ -96,6 +96,13 @@ const ruleProviders = {
 		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/AiDomain.yaml",
 		"path": "./ruleset/dongge2003/AiDomain.yaml"
 	},
+	// Gemini
+	"Gemini": {
+		...ruleProviderCommon,
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/Gemini.yaml",
+		"path": "./ruleset/dongge2003/Gemini.yaml"
+	},
 	// 字节AI
 	"CiciAi": {
 		...ruleProviderCommon,
@@ -177,7 +184,6 @@ const ruleProviders = {
 const rules = [
 	//自定义...
 	"DOMAIN,commandcode.ai,AI",
-	"IP-CIDR,111.228.63.123/32,DIRECT",
 
 	//clash
 	"DOMAIN,clash.razord.top,全局直连",
@@ -196,6 +202,7 @@ const rules = [
 	"RULE-SET,cncidr,全局直连",
 
 	//AI
+	"RULE-SET,Gemini,AIUS",
 	"RULE-SET,AiDomain,AI",
 	"RULE-SET,CiciAi,AI",
 
@@ -301,12 +308,22 @@ function main(config) {
 		},
 		{
 			"expected-status": "200",
-			"name": "AI",
+			"name": "AIUS",
 			"type": "url-test",
 			"url": "https://chatgpt.com",
 			"interval": 300,
 			"include-all": true,
 			"filter": "🇺🇸",
+			"icon": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Google_Gemini_icon_2025.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+		},
+		{
+			"expected-status": "200",
+			"name": "AI",
+			"type": "url-test",
+			"url": "https://chatgpt.com",
+			"interval": 300,
+			"include-all": true,
+			"filter": "🇯🇵|🇺🇸",
 			"icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg",
 		},
 		{
