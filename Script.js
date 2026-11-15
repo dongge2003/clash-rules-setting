@@ -319,7 +319,7 @@ function main(config) {
 			"expected-status": "200",
 			"name": "AIUS",
 			"type": "url-test",
-			"url": "https://chatgpt.com",
+			"url": "https://gemini.google.com",
 			"interval": 300,
 			"include-all": true,
 			"filter": "🇺🇸",
