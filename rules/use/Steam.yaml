@@ -1,0 +1,45 @@
+payload:
+ # 内容：Steam 商店 / 社区 / 账号 / 聊天 / 直播 / 创意工坊 → 代理
+ # 用途：RULE-SET,Steam,延迟选优
+ # 位置：必须排在 RULE-SET,SteamDownload、RULE-SET,SteamCn 之后，且都在 GEOIP,CN / MATCH 之前
+ # 说明：所有下载 CDN 已移到 SteamDownload.yaml / SteamCn.yaml。
+ #       steamstatic.com 故意留在这里走代理：商店/社区的静态资源走 Cloudflare 边缘，
+ #       国内直连容易被干扰，所以 SteamCn.yaml 里不要再放它的直连规则（原 DOMAIN,steamstatic.com 已删）。
+ #       cm0.steampowered.com（真正在用的连接管理器）会落在这条 steampowered.com 后缀上 → 代理，属预期。
+ # 数量：25条
+
+ # --- 商店 / 社区 / 账号 / 平台 ---
+ - DOMAIN-SUFFIX,steamcommunity.com
+ - DOMAIN-SUFFIX,steamgames.com
+ - DOMAIN-SUFFIX,steam-chat.com
+ - DOMAIN-SUFFIX,steamstat.us
+ # store. / checkout. / help. / login. / api. / cm0. ...
+ - DOMAIN-SUFFIX,steampowered.com
+ # cdn.cloudflare.steamstatic.com（商店静态资源，Cloudflare 边缘国内不稳，走代理）
+ - DOMAIN-SUFFIX,steamstatic.com
+ - DOMAIN-SUFFIX,valvesoftware.com
+ - DOMAIN-SUFFIX,valve.net
+ - DOMAIN-SUFFIX,underlords.com
+
+ # --- 短链 / 直播 / 客户端辅助（对照 blackmatrix7 Steam 补齐）---
+ - DOMAIN-SUFFIX,s.team
+ - DOMAIN-SUFFIX,steam.tv
+ - DOMAIN-SUFFIX,steam-api.com
+ - DOMAIN-SUFFIX,steamdeck.com
+ - DOMAIN-SUFFIX,steamconnecttest.com
+ # 玩 Dota 2 才需要；不玩可删
+ - DOMAIN-SUFFIX,dota2.com
+
+ # --- 游戏 / 第三方商店（非 Steam 业务，按原样保留）---
+ - DOMAIN-SUFFIX,playartifact.com
+ - DOMAIN-SUFFIX,fanatical.com
+ - DOMAIN-SUFFIX,humblebundle.com
+
+ # --- 商店 / 社区 / 直播静态资源（Akamai）---
+ - DOMAIN,steambroadcast.akamaized.net
+ - DOMAIN,steamcommunity-a.akamaihd.net
+ - DOMAIN,steamstore-a.akamaihd.net
+ - DOMAIN,steamusercontent-a.akamaihd.net
+ - DOMAIN,steamuserimages-a.akamaihd.net
+ - DOMAIN,steamvideo-a.akamaihd.net
+ - DOMAIN,steammobile.akamaized.net

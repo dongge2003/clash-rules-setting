@@ -12,7 +12,7 @@ const ruleProviders = {
 		...ruleProviderCommon,
 		"behavior": "domain",
 		"url": "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt",
-		"path": "./ruleset/Loyalsoldier/direct1.yaml"
+		"path": "./ruleset/Loyalsoldier/direct.yaml"
 	},
 	"proxy": {
 		...ruleProviderCommon,
@@ -93,21 +93,21 @@ const ruleProviders = {
 	"AiDomain": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/AiDomain.yaml",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/AiDomain.yaml",
 		"path": "./ruleset/dongge2003/AiDomain.yaml"
 	},
 	// Gemini
 	"Gemini": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/Gemini.yaml",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/Gemini.yaml",
 		"path": "./ruleset/dongge2003/Gemini.yaml"
 	},
 	// 字节AI
 	"CiciAi": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/CiciAi.yaml",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/CiciAi.yaml",
 		"path": "./ruleset/dongge2003/CiciAi.yaml"
 	},
 
@@ -116,26 +116,32 @@ const ruleProviders = {
 	"Epic": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/Epic.yaml",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/Epic.yaml",
 		"path": "./ruleset/dongge2003/Epic.yaml"
 	},
 	"Sony": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/Sony.yaml",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/Sony.yaml",
 		"path": "./ruleset/dongge2003/Sony.yaml"
 	},
 	"Steam": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Steam.yaml",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/Steam.yaml",
 		"path": "./ruleset/dongge2003/Steam.yaml"
 	},
 	"SteamCn": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/SteamCn.yaml",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/SteamCn.yaml",
 		"path": "./ruleset/dongge2003/SteamCn.yaml"
+	},
+	"SteamDownload": {
+		...ruleProviderCommon,
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/SteamDownload.yaml",
+		"path": "./ruleset/dongge2003/SteamDownload.yaml"
 	},
 
 
@@ -143,14 +149,14 @@ const ruleProviders = {
 	"Developer": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/Developer.yaml",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/Developer.yaml",
 		"path": "./ruleset/dongge2003/Developer.yaml"
 	},
 
 	"Web3": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Web3.yaml",
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/Web3.yaml",
 		"path": "./ruleset/dongge2003/Web3.yaml"
 	},
 
@@ -159,14 +165,14 @@ const ruleProviders = {
 	"Khan": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/Khan.yaml",
-		"path": "./ruleset/dongge2003/Ruleset/Khan.yaml"
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/Khan.yaml",
+		"path": "./ruleset/dongge2003/Khan.yaml"
 	},
 	"Edutools": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/Edutools.yaml",
-		"path": "./ruleset/dongge2003/Ruleset/Edutools.yaml"
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/Edutools.yaml",
+		"path": "./ruleset/dongge2003/Edutools.yaml"
 	},
 
 
@@ -174,8 +180,8 @@ const ruleProviders = {
 	"UK": {
 		...ruleProviderCommon,
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/Ruleset/UK.yaml",
-		"path": "./ruleset/dongge2003/Ruleset/UK.yaml"
+		"url": "https://cdn.jsdelivr.net/gh/dongge2003/clash-rules-setting@main/rules/use/UK.yaml",
+		"path": "./ruleset/dongge2003/UK.yaml"
 	},
 };
 
@@ -183,7 +189,7 @@ const ruleProviders = {
 // 规则
 const rules = [
 	//自定义...
-	"DOMAIN,commandcode.ai,AI",
+
 
 	//clash
 	"DOMAIN,clash.razord.top,全局直连",
@@ -200,6 +206,9 @@ const rules = [
 	"RULE-SET,direct,全局直连",
 	"RULE-SET,lancidr,全局直连",
 	"RULE-SET,cncidr,全局直连",
+	"RULE-SET,SteamCn,全局直连",
+	"RULE-SET,SteamDownload,全局直连",
+
 
 	//AI
 	"RULE-SET,Gemini,AIUS",

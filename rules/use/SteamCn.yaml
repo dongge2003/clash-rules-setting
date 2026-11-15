@@ -1,0 +1,54 @@
+payload:
+ # 内容：蒸汽平台 / 国区 CDN / 国区 CM / Steam UGC 资源 → 直连
+ # 用途：RULE-SET,SteamCn,全局直连
+ # 位置：排在 RULE-SET,Steam 之前
+ # 说明一：原文件第 31 行 DOMAIN,steamstatic.com 已删除。DOMAIN 只精确匹配裸域，
+ #         而 steamstatic.com 没有 A 记录；真正的资源在 cdn.cloudflare.steamstatic.com 等子域，
+ #         会被 Steam.yaml 的 DOMAIN-SUFFIX,steamstatic.com 命中走代理 ——
+ #         也就是说“国内可直连的 Steam 资源域”这条注释从来没有生效过，改成 SUFFIX 更糟。
+ # 说明二：国区 CDN 收敛回精确主机名。原来的 DOMAIN-SUFFIX,8686c.com / qtlglb.com 等
+ #         是 CDN 厂商的通用域，会把同一 CDN 上的其它业务也强制直连。
+ # 说明三：“已无解析”分组的域名当前查不到 A 记录（Steam 国区 CDN 合约变更），
+ #         保留作为回退，命不中不影响任何流量；想清清爽爽可以直接删掉整组。
+ # 数量：21条
+
+ # --- 蒸汽平台（Steam 中国）---
+ - DOMAIN-SUFFIX,steamchina.com
+
+ # --- 仍然有效的国区 CDN（有 A 记录）---
+ # 白山云：st.dl.bscstorage.net / st.dl.eccdnx.com / trts.baishancdnx.cn
+ - DOMAIN,st.dl.bscstorage.net
+ - DOMAIN,st.dl.eccdnx.com
+ - DOMAIN,trts.baishancdnx.cn
+ # 金山云：dl.steam.clngaa.com
+ - DOMAIN,dl.steam.clngaa.com
+ # 其它国区节点：xz.pphimalayanrt.com / lv.queniujq.cn
+ - DOMAIN,xz.pphimalayanrt.com
+ - DOMAIN,lv.queniujq.cn
+
+ # --- 已无解析，保留作回退 ---
+ # 完美世界系（wmsj）
+ - DOMAIN,csgo.wmsj.cn
+ - DOMAIN,dota2.wmsj.cn
+ - DOMAIN,wmsjsteam.com
+ # 白山云 pingyuncloud 节点
+ - DOMAIN,st.dl.pinyuncloud.com
+ # 金山云旧节点
+ - DOMAIN,dl.steam.ksyna.com
+ # 网宿（CDNetworks）8686c
+ - DOMAIN,steampowered.com.8686c.com
+ - DOMAIN,steamstatic.com.8686c.com
+ # 网宿（CDNetworks）qtlglb
+ - DOMAIN,steam.apac.qtlglb.com
+ - DOMAIN,steam.eca.qtlglb.com
+ - DOMAIN,steam.naeu.qtlglb.com
+ - DOMAIN,steam.ru.qtlglb.com
+ # 华为云
+ - DOMAIN,steampipe.steamcontent.tnkjmec.com
+
+ # --- 国区连接管理器（推荐直连，登录/掉线更稳；想让联机走代理就删掉这条）---
+ - DOMAIN-SUFFIX,steamserver.net
+
+ # --- UGC 图片：与 Steam.yaml 里的 *-a.akamaihd.net 旧主机策略不一致（上游历史遗留）---
+ # 如果社区头像/创意工坊截图出现“一半能看一半裂开”，把这条挪到 Steam.yaml 统一走代理
+ - DOMAIN-SUFFIX,steamusercontent.com

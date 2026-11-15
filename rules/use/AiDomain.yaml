@@ -1,6 +1,10 @@
 payload:
   # 3rd part AI router
 
+  # commandcode.ai
+  - DOMAIN-SUFFIX,commandcode.ai
+
+  # cerebras.ai
   - DOMAIN-SUFFIX,cerebras.ai
 
   # OpenAi

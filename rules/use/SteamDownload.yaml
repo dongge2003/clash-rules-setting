@@ -1,0 +1,65 @@
+payload:
+ # 内容：Steam 下载 / 内容分发 CDN（Valve 自建 + Akamai + 境外 ISP 节点）+ 内容服务器 IP 段 → 直连
+ # 用途：RULE-SET,SteamDownload,全局直连
+ # 位置：必须排在 RULE-SET,Steam 之前（Steam.yaml 的 steampowered.com 后缀会吃掉它的子域）
+ # 说明一：原文件 29 条里有 17 条实测无解析，已删除或挪走：
+ #         content0-9.steampowered.com（10 条，内容 CDN 早已迁到 *.steamcontent.com）、
+ #         cdn2/cdn3/cdn4.steampowered.com（3 条）、steampowered.com.edgesuite.net、
+ #         cm.steampowered.com（不存在；真正在用的是 cm0.steampowered.com，走 Steam.yaml 代理）、
+ #         steamcontent.tnkjmec.com（华为云节点已下线，精确主机名留在 SteamCn.yaml 的失效组）、
+ #         f3b7q2p3.ssl.hwcdn.net（Highwinds 旧节点，已 NXDOMAIN）。
+ # 说明二：cdn.steampowered.com 可以解析，但它 CNAME 到 storefront.akamai.steamstatic.com，
+ #         属于商店静态资源，不是下载 CDN —— 注释已按实际用途改写。
+ # 说明三：新增 IP-CIDR 段。Steam 客户端会按 CM 下发的列表直连内容服务器 IP，
+ #         这部分域名规则管不到，是社区“下载直连”方案的核心（dogfight360 / Aethersailor）。
+ # 数量：35条（域名 12 + IP 23）
+
+ # --- 客户端更新器（Fastly）---
+ - DOMAIN,client-download.steampowered.com
+
+ # --- 商店静态资源（Akamai，非下载 CDN；保留直连无害）---
+ - DOMAIN,cdn.steampowered.com
+
+ # --- Valve 全球内容 CDN：*.steamcontent.com ---
+ # 一条后缀即覆盖 google/level3/fastly/telus.cdn.steampipe.steamcontent.com 等全部区域缓存
+ - DOMAIN-SUFFIX,steamcontent.com
+
+ # --- Akamai 下载边缘 ---
+ # 保留原“直连”策略。若发现下载速度被 QoS 压到很低，
+ # 把这 4 条挪到 Steam.yaml 走代理（ACL4SSR / blackmatrix7 就是这么分的）
+ - DOMAIN-SUFFIX,steampipe.akamaized.net
+ - DOMAIN-SUFFIX,steampipe-kr.akamaized.net
+ - DOMAIN-SUFFIX,steampipe-partner.akamaized.net
+ - DOMAIN-SUFFIX,steamcdn-a.akamaihd.net
+
+ # --- 境外 ISP / CDN 节点（国区基本不会被分配，保留仅为外区/出差场景）---
+ - DOMAIN-SUFFIX,steam.cdn.on.net
+ - DOMAIN-SUFFIX,steam.cdn.orcon.net.nz
+ - DOMAIN-SUFFIX,steam.cdn.slingshot.co.nz
+ - DOMAIN-SUFFIX,steam.cdn.webra.ru
+ - DOMAIN-SUFFIX,steam-dns.top.comcast.net
+
+ # --- Valve 内容服务器 / 中继 IP 段（no-resolve：不为了匹配 IP 规则去解析域名）---
+ - IP-CIDR,45.121.184.0/24,no-resolve
+ - IP-CIDR,103.10.124.0/23,no-resolve
+ - IP-CIDR,103.28.54.0/24,no-resolve
+ - IP-CIDR,146.66.152.0/24,no-resolve
+ - IP-CIDR,146.66.155.0/24,no-resolve
+ - IP-CIDR,153.254.86.0/24,no-resolve
+ - IP-CIDR,155.133.224.0/22,no-resolve
+ - IP-CIDR,155.133.230.0/24,no-resolve
+ - IP-CIDR,155.133.232.0/23,no-resolve
+ - IP-CIDR,155.133.234.0/24,no-resolve
+ - IP-CIDR,155.133.236.0/22,no-resolve
+ - IP-CIDR,155.133.240.0/23,no-resolve
+ - IP-CIDR,155.133.244.0/23,no-resolve
+ - IP-CIDR,155.133.246.0/24,no-resolve
+ - IP-CIDR,155.133.248.0/21,no-resolve
+ - IP-CIDR,162.254.192.0/21,no-resolve
+ - IP-CIDR,185.25.182.0/23,no-resolve
+ - IP-CIDR,190.217.32.0/22,no-resolve
+ - IP-CIDR,192.69.96.0/22,no-resolve
+ - IP-CIDR,205.196.6.0/24,no-resolve
+ - IP-CIDR,205.185.194.0/24,no-resolve
+ - IP-CIDR,208.64.200.0/22,no-resolve
+ - IP-CIDR,208.78.164.0/22,no-resolve
